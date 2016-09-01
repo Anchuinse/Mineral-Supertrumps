@@ -70,4 +70,16 @@ public class TrumpCard
                 this.changeCategory(newscanner.nextLine());
         }
     }
+
+    public String getName()
+            //retrieves name of card
+    {
+        return name;
+    }
+
+    public String getCategory()
+            //retrieves category the card will change the playable trump too
+    {
+        return category;
+    }
 }
