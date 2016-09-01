@@ -2,7 +2,7 @@
  * Created by Matt on 9/1/16.
  */
 import java.util.*;
-public class TrumpCard
+public class TrumpCard extends Card
 {
     String name, category;
 
