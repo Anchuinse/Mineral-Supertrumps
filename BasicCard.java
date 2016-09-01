@@ -300,4 +300,34 @@ public class BasicCard
         }
         return price;
     }
+
+    public double getHardness()
+            //gets hardness
+    {
+        return hardness;
+    }
+
+    public double getGravity()
+            //gets specific gravity
+    {
+        return specific_gravity;
+    }
+
+    public byte getAbundance()
+            //gets raw crystal abundance score used in computing, use showStats to see non-number value
+    {
+        return crystal_abundance;
+    }
+
+    public byte getValue()
+            //gets raw economic value score used in computing, use showStats to see non-number value
+    {
+        return economic_value;
+    }
+
+    public byte getCleavage()
+            //gets raw cleavage value score used in computing, use showStats to see non-number value
+    {
+        return cleavage;
+    }
 }
