@@ -1,17 +1,16 @@
 /**
- * Created by Matt on 8/24/16.
+ * Created by Matt on 9/5/16.
  */
+import static java.lang.Math.round;
 public class MineralCard extends Card
-    //this should serve as the template for all basic cards, supertrump cards will have their own class
-    //contains constructors as well as a function to print the values of a card (see showStats)
-    //also contains functions to transform the category string values into number values and back
+        //the template for all mineral cards
 {
     String name;
     double hardness,specific_gravity;
-    byte crystal_abundance, economic_value, cleavage;
+    double crystal_abundance, economic_value, cleavage;
 
     public MineralCard()
-            //basic constructor, creates an essentially worthless card (all lowest values)
+    //basic constructor, creates an essentially worthless card (all lowest values)
     {
         name = "Unnamed_Mineral";
         hardness = 0;
@@ -25,7 +24,7 @@ public class MineralCard extends Card
     }
 
     public MineralCard(String newname, double input_h, double input_sg, String cv, String ca, String ev)
-            //constructor: accepts numbers for hardness and specific gravity and accepts strings for cleavage, abundance, and econ
+    //constructor: accepts numbers for hardness and specific gravity and accepts strings for cleavage, abundance, and econ
     {
         name = newname;
         hardness = input_h;
@@ -42,19 +41,19 @@ public class MineralCard extends Card
     }
 
     public void showStats()
-            //shows the hardness, specific gravity, cleavage, crystal abundance, and economic value of a card
+    //shows the hardness, specific gravity, cleavage, crystal abundance, and economic value of a card
     {
         String cv,ca,ev;
         cv = CleavageToCleave(cleavage);
         ca = AbundanceToRarity(crystal_abundance);
         ev = EconomicValueToPrice(economic_value);
-        System.out.println("The stats of " + name + " are as follows: hardness is " + hardness +
+        System.out.println(name + ": hardness is " + hardness +
                 ", specific gravity is " + specific_gravity + ", cleavage is " +
                 cv + ", crystal abundance is " + ca + ", and economic value is " + ev + ".");
     }
 
-    public byte CleaveToCleavage(String cleave)
-            //converts cleavage string value into a numerical value
+    public double CleaveToCleavage(String cleave)
+    //converts cleavage string value into a numerical value
     {
         switch(cleave)
         {
@@ -112,11 +111,12 @@ public class MineralCard extends Card
         return cleavage;
     }
 
-    public String CleavageToCleave(byte cleavage)
-            //converts cleavage numerical value into a string value
+    public String CleavageToCleave(double cleavage)
+    //converts cleavage numerical value into a string value
     {
+        int rounded = (int) round(cleavage);
         String cleave="";
-        switch(cleavage)
+        switch(rounded)
         {
             case 0:
                 cleave = "none";
@@ -171,8 +171,8 @@ public class MineralCard extends Card
         return cleave;
     }
 
-    public byte RarityToAbundance(String rarity)
-            //converts crystal abundance string value into a numerical value
+    public double RarityToAbundance(String rarity)
+    //converts crystal abundance string value into a numerical value
     {
         byte ca=7;
         switch(rarity)
@@ -203,11 +203,12 @@ public class MineralCard extends Card
         return ca;
     }
 
-    public String AbundanceToRarity(byte crystal_abundance)
-            //converts crystal abundance numerical value into a string value
+    public String AbundanceToRarity(double crystal_abundance)
+    //converts crystal abundance numerical value into a string value
     {
+        int rounded = (int) round(crystal_abundance);
         String rarity = "";
-        switch(crystal_abundance)
+        switch(rounded)
         {
             case 0:
                 rarity = "ultratrace";
@@ -236,8 +237,8 @@ public class MineralCard extends Card
         return rarity;
     }
 
-    public byte PriceToEconomicValue(String price)
-            //converts economic value string value into a numerical value
+    public double PriceToEconomicValue(String price)
+    //converts economic value string value into a numerical value
     {
         byte ev;
         switch(price)
@@ -269,11 +270,12 @@ public class MineralCard extends Card
         return ev;
     }
 
-    public String EconomicValueToPrice(byte economic_value)
-            //converts economoic value string value into a numerical value
+    public String EconomicValueToPrice(double economic_value)
+    //converts economoic value string value into a numerical value
     {
+        int rounded = (int) round(economic_value);
         String price = "";
-        switch(economic_value)
+        switch(rounded)
         {
             case 0:
                 price = "trivial";
@@ -301,33 +303,140 @@ public class MineralCard extends Card
         return price;
     }
 
+    public String getName()
+    //returns name; pretty simple
+    {
+        return name;
+    }
+
     public double getHardness()
-            //gets hardness
+    //gets hardness
     {
         return hardness;
     }
 
     public double getGravity()
-            //gets specific gravity
+    //gets specific gravity
     {
         return specific_gravity;
     }
 
-    public byte getAbundance()
-            //gets raw crystal abundance score used in computing, use showStats to see non-number value
+    public double getAbundance()
+    //gets raw crystal abundance score used in computing, use showStats to see non-number value
     {
         return crystal_abundance;
     }
 
-    public byte getValue()
-            //gets raw economic value score used in computing, use showStats to see non-number value
+    public double getValue()
+    //gets raw economic value score used in computing, use showStats to see non-number value
     {
         return economic_value;
     }
 
-    public byte getCleavage()
-            //gets raw cleavage value score used in computing, use showStats to see non-number value
+    public double getCleavage()
+    //gets raw cleavage value score used in computing, use showStats to see non-number value
     {
         return cleavage;
+    }
+
+    public String getNewCurrentCategory(String current_category)
+    //returns the current_category
+    //does nothing because Mineral Cards do not
+    {
+        return current_category;
+    }
+
+    public double getNewCurrentValue(String current_category)
+    //returns the value of the current trump category of the card
+    {
+        double newvalue = 0;
+        switch(current_category)
+        {
+            case "hardness":
+                newvalue = hardness;
+                break;
+            case "economic value":
+                newvalue = economic_value;
+                break;
+            case "specific gravity":
+                newvalue = specific_gravity;
+                break;
+            case "crystal abundance":
+                newvalue = crystal_abundance;
+                break;
+            case "cleavage":
+                newvalue = cleavage;
+                break;
+            default:
+                System.out.println("BRO YOU HAVE A PROBLEM BECAUSE YOU ENTERED THE WRONG CURRENT CATEGORY IN YOUR CODE SOMEWHERE");
+                break;
+
+        }
+        if (newvalue==0)
+        {
+            System.out.println("YOUR getCurrentValue() HAS SOME PROBLEMS!!!");
+        }
+        return newvalue;
+    }
+
+    public boolean checkIfPlayable(String current_category, double current_value)
+    //compares the card to the current value of the currently playable trump category
+    { boolean returns = true;
+        if(current_category.equals("hardness"))
+        {
+            if(getHardness() > current_value)
+            {
+                returns = true;
+            }
+            else
+            {
+                returns = false;
+            }
+        }
+        if(current_category.equals("specific gravity"))
+        {
+            if(getGravity() > current_value)
+            {
+                returns = true;
+            }
+            else
+            {
+                returns = false;
+            }
+        }
+        if(current_category.equals("economic value"))
+        {
+            if(getValue() > current_value)
+            {
+                returns = true;
+            }
+            else
+            {
+                returns = false;
+            }
+        }
+        if(current_category.equals("crystal abundance"))
+        {
+            if(getAbundance() > current_value)
+            {
+                returns = true;
+            }
+            else
+            {
+                returns = false;
+            }
+        }
+        if(current_category.equals("cleavage"))
+        {
+            if(getCleavage() > current_value)
+            {
+                returns = true;
+            }
+            else
+            {
+                returns = false;
+            }
+        }
+        return returns;
     }
 }
