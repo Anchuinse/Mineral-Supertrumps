@@ -35,24 +35,34 @@ public class MineralCard extends Card
             hardness = 1;
         }
         specific_gravity = input_sg;
-        cleavage = CleaveToCleavage(cv);
-        crystal_abundance = RarityToAbundance(ca);
-        economic_value = PriceToEconomicValue(ev);
+        cleavage = cleaveToCleavage(cv);
+        crystal_abundance = rarityToAbundance(ca);
+        economic_value = priceToEconomicValue(ev);
     }
 
     public void showStats()
     //shows the hardness, specific gravity, cleavage, crystal abundance, and economic value of a card
     {
         String cv,ca,ev;
-        cv = CleavageToCleave(cleavage);
-        ca = AbundanceToRarity(crystal_abundance);
-        ev = EconomicValueToPrice(economic_value);
-        System.out.println(name + ": hardness is " + hardness +
-                ", specific gravity is " + specific_gravity + ", cleavage is " +
-                cv + ", crystal abundance is " + ca + ", and economic value is " + ev + ".");
+        cv = cleavageToCleave(cleavage);
+        ca = abundanceToRarity(crystal_abundance);
+        ev = economicValueToPrice(economic_value);
+        System.out.printf("%20s", name + ":");
+        System.out.printf("%11s", "hardness:");
+        System.out.printf("%4s", hardness);
+        System.out.printf("%18s", "specific gravity:");
+        System.out.printf("%3s", specific_gravity);
+        System.out.printf("%11s", "cleavage:");
+        System.out.printf("%20s", cv);
+        System.out.printf("%20s", "crystal abundance:");
+        System.out.printf("%10s", ca);
+        System.out.printf("%18s", "economic value:");
+        System.out.printf("%10s", ev);
+        System.out.println("");
+        //System.out.println(name + ": hardness:" + hardness + " specific gravity:" + specific_gravity + " cleavage:" + cv + " crystal abundance:" + ca + " and economic value:" + ev);
     }
 
-    public double CleaveToCleavage(String cleave)
+    public double cleaveToCleavage(String cleave)
     //converts cleavage string value into a numerical value
     {
         switch(cleave)
@@ -111,7 +121,7 @@ public class MineralCard extends Card
         return cleavage;
     }
 
-    public String CleavageToCleave(double cleavage)
+    public String cleavageToCleave(double cleavage)
     //converts cleavage numerical value into a string value
     {
         int rounded = (int) round(cleavage);
@@ -171,10 +181,10 @@ public class MineralCard extends Card
         return cleave;
     }
 
-    public double RarityToAbundance(String rarity)
+    public double rarityToAbundance(String rarity)
     //converts crystal abundance string value into a numerical value
     {
-        byte ca=7;
+        double ca=7;
         switch(rarity)
         {
             case "ultratrace":
@@ -193,6 +203,7 @@ public class MineralCard extends Card
                 ca = 4;
                 break;
             case "very high":
+                ca = 5;
                 break;
             default:
                 System.out.println("Crystal abundance unclear.");
@@ -203,7 +214,7 @@ public class MineralCard extends Card
         return ca;
     }
 
-    public String AbundanceToRarity(double crystal_abundance)
+    public String abundanceToRarity(double crystal_abundance)
     //converts crystal abundance numerical value into a string value
     {
         int rounded = (int) round(crystal_abundance);
@@ -237,7 +248,7 @@ public class MineralCard extends Card
         return rarity;
     }
 
-    public double PriceToEconomicValue(String price)
+    public double priceToEconomicValue(String price)
     //converts economic value string value into a numerical value
     {
         byte ev;
@@ -270,7 +281,7 @@ public class MineralCard extends Card
         return ev;
     }
 
-    public String EconomicValueToPrice(double economic_value)
+    public String economicValueToPrice(double economic_value)
     //converts economoic value string value into a numerical value
     {
         int rounded = (int) round(economic_value);
@@ -349,7 +360,7 @@ public class MineralCard extends Card
     public double getNewCurrentValue(String current_category)
     //returns the value of the current trump category of the card
     {
-        double newvalue = 0;
+        double newvalue = -1;
         switch(current_category)
         {
             case "hardness":
@@ -372,7 +383,7 @@ public class MineralCard extends Card
                 break;
 
         }
-        if (newvalue==0)
+        if (newvalue==-1)
         {
             System.out.println("YOUR getCurrentValue() HAS SOME PROBLEMS!!!");
         }

@@ -36,7 +36,9 @@ public class TrumpCard extends Card
     public void showStats()
     //displays a brief description of the card's effect
     {
-        System.out.println(name + " allows a player to change the playable trump to the trump of "+ category + ".");
+        System.out.printf("%20s", name + ":");
+        System.out.println(" allows a player to change the playable trump to "+ category + ".");
+        //System.out.println(name + " allows a player to change the playable trump to "+ category + ".");
     }
 
     public void changeName(String newname)
@@ -91,7 +93,7 @@ public class TrumpCard extends Card
         {
             System.out.println("Which category do you want the new playable trump to be?");
             Scanner scanner = new Scanner(System.in);
-            String newcategory = scanner.next();
+            String newcategory = scanner.nextLine();
             switch(newcategory.toLowerCase())
             {
                 case "hardness":
