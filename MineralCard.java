@@ -51,7 +51,7 @@ public class MineralCard extends Card
         System.out.printf("%11s", "hardness:");
         System.out.printf("%4s", hardness);
         System.out.printf("%18s", "specific gravity:");
-        System.out.printf("%3s", specific_gravity);
+        System.out.printf("%4s", specific_gravity);
         System.out.printf("%11s", "cleavage:");
         System.out.printf("%20s", cv);
         System.out.printf("%20s", "crystal abundance:");
