@@ -16,6 +16,7 @@ public class Game {
     public Game()
     //constructor: asks for number of players and let's you name them
     {
+        System.out.println("Let's play Mineral SuperTrumps!");
         int playernumber = askForPlayers();
         Player[] players = new Player[playernumber];
         for (int i = 0; i < playernumber; ++i) {
@@ -263,10 +264,8 @@ public class Game {
     //moves a card from the Deck to the hand of the peron who's turn it is
     {
         Random generator = new Random();
-        Card newdraw = Deck.get(generator.nextInt(Deck.size()));      //picks card from deck
-        ArrayList<Card> newhand = player.getHand();
-        newhand.add(newdraw);
-        player.changeHand(newhand);                                     //adds card to hand
+        Card newdraw = Deck.get(generator.nextInt(Deck.size()));
+        player.getHand().add(newdraw);
         Deck.remove(newdraw);                                           //removes card from deck
     }
 
@@ -469,7 +468,7 @@ public class Game {
         System.out.println("Do you want to play a card or pass?");
         Scanner scanner = new Scanner(System.in);
         String entered = scanner.nextLine();
-        if (getHandNames(playerlist[who_turn]).contains(entered) == true) {
+        if (getHandNames(playerlist[who_turn]).contains(entered.toLowerCase()) == true) {
             playCard(entered);
         } else {
             switch (entered) {
